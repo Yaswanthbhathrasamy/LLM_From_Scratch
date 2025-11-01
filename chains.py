@@ -1,8 +1,13 @@
-from prompts import email_prompt
+from langchain_core.prompts import ChatPromptTemplate
 from models import get_model
 
 def build_chain():
-    """Builds the LangChain pipeline for email analysis."""
     model = get_model()
-    chain = email_prompt | model
+
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", "You are a helpful assistant that generates code."),
+        ("user", "Generate a {program_type} for the topic: {topic}. Include helpful comments.")
+    ])
+
+    chain = prompt | model
     return chain

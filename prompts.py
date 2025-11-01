@@ -1,22 +1,18 @@
 from langchain_core.prompts import ChatPromptTemplate
 
-system_prompt = """
-You are a cybersecurity analyst specialized in detecting phishing and suspicious emails.
-Analyze the given email content and classify it as one of:
-- Legitimate
-- Spam
-- Phishing
+system_msg = """
+You are a code-generation assistant. When given a programming language and a topic,
+you must produce only the requested program's source code — nothing else.
 
-You must also explain the reasoning clearly and provide a short safety tip.
-Never render links or click them.
+Rules:
+1. Output raw source code in the requested language.
+2. Add minimal inline comments.
+3. No explanations, markdown, or text outside of the code.
 """
 
-user_prompt = """
-Email content:
-{email_text}
-"""
+user_msg = "Generate a {program_type} that implements: {topic}. Include helpful comments."
 
-email_prompt = ChatPromptTemplate([
-    ("system", system_prompt),
-    ("user", user_prompt)
+prompt_template = ChatPromptTemplate([
+    ("system", system_msg),
+    ("user", user_msg)
 ])

@@ -1,19 +1,14 @@
 from chains import build_chain
 
 def main():
-    print("📧 Suspicious Email Detector (MailShield)")
-    print("-----------------------------------------\n")
+    print("=== Simple Code Generator ===")
+    program_type = input("Enter the programming language / program type (e.g., 'Python script', 'Java class'): ")
+    topic = input("Enter the topic (e.g., 'Bubble Sort', 'Web Scraper'): ")
 
-    email_text = input("Paste the suspicious email content:\n\n")
-
+    print("\nGenerating code... Please wait...\n")
     chain = build_chain()
-    print("\n🔍 Analyzing email...\n")
-
-    response = chain.invoke({"email_text": email_text})
-
-    print("🧠 Analysis Result:\n")
+    response = chain.invoke({"program_type": program_type, "topic": topic})
     print(response.content)
-    print("\n✅ Done.")
 
 if __name__ == "__main__":
     main()
